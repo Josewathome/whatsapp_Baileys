@@ -1,0 +1,26 @@
+Useful commands afterward
+
+Check if it’s running:
+
+pm2 status
+
+
+Restart manually:
+first delete auth: rm -rf app/baileys_bridge/auth_info
+
+pm2 restart baileys_bridge
+
+
+View logs:
+
+pm2 logs baileys_bridge
+
+
+Stop service:
+
+pm2 stop baileys_bridge
+
+
+Delete service:
+
+pm2 delete baileys_bridge

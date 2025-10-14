@@ -1,0 +1,109 @@
+.
+├── Dockerfile.dev
+├── Dockerfile.dev.baileys
+├── Dockerfile.prod
+├── Dockerfile.prod.baileys
+├── README.md
+├── __pycache__
+│   └── main.cpython-310.pyc
+├── app
+│   ├── api
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.pyc
+│   │   │   ├── routes.cpython-310.pyc
+│   │   │   ├── schemas.cpython-310.pyc
+│   │   │   └── session_routes.cpython-310.pyc
+│   │   ├── routes.py
+│   │   ├── schemas.py
+│   │   └── session_routes.py
+│   ├── baileys_bridge
+│   │   ├── baileys_bridge.js
+│   │   └── package.json
+│   ├── controllers
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.pyc
+│   │   │   ├── enhanced_whatsapp_controller.cpython-310.pyc
+│   │   │   └── whatsapp_controller.cpython-310.pyc
+│   │   ├── enhanced_whatsapp_controller.py
+│   │   └── whatsapp_controller.py
+│   ├── core
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.pyc
+│   │   │   └── config.cpython-310.pyc
+│   │   ├── config.py
+│   │   └── types.py
+│   ├── domain
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.pyc
+│   │   │   └── exceptions.cpython-310.pyc
+│   │   ├── exceptions.py
+│   │   ├── models.py
+│   │   └── services
+│   │       ├── __init__.py
+│   │       ├── __pycache__
+│   │       │   ├── __init__.cpython-310.pyc
+│   │       │   ├── avatar_service.cpython-310.pyc
+│   │       │   ├── business_service.cpython-310.pyc
+│   │       │   ├── connection_manager.cpython-310.pyc
+│   │       │   ├── exists_service.cpython-310.pyc
+│   │       │   ├── search_service.cpython-310.pyc
+│   │       │   ├── session_registration_service.cpython-310.pyc
+│   │       │   └── status_service.cpython-310.pyc
+│   │       ├── avatar_service.py
+│   │       ├── business_service.py
+│   │       ├── connection_manager.py
+│   │       ├── exists_service.py
+│   │       ├── search_service.py
+│   │       ├── session_registration_service.py
+│   │       └── status_service.py
+│   └── infrastructure
+│       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── __init__.cpython-310.pyc
+│       │   └── qrcode.cpython-310.pyc
+│       ├── baileys
+│       │   ├── __init__.py
+│       │   ├── __pycache__
+│       │   │   ├── __init__.cpython-310.pyc
+│       │   │   └── whatsapp_client.cpython-310.pyc
+│       │   └── whatsapp_client.py
+│       ├── encryption
+│       │   ├── __pycache__
+│       │   │   └── encrypt.cpython-310.pyc
+│       │   └── encrypt.py
+│       ├── health
+│       │   ├── __pycache__
+│       │   │   └── health_monitor.cpython-310.pyc
+│       │   └── health_monitor.py
+│       ├── keydb
+│       │   ├── __init__.py
+│       │   ├── __pycache__
+│       │   │   ├── __init__.cpython-310.pyc
+│       │   │   ├── adapters.cpython-310.pyc
+│       │   │   └── queue.cpython-310.pyc
+│       │   ├── adapters.py
+│       │   └── queue.py
+│       ├── logging
+│       │   ├── __init__.py
+│       │   ├── __pycache__
+│       │   │   ├── __init__.cpython-310.pyc
+│       │   │   └── logger.cpython-310.pyc
+│       │   └── logger.py
+│       ├── qrcode.py
+│       └── session
+│           ├── __init__.py
+│           ├── __pycache__
+│           │   ├── __init__.cpython-310.pyc
+│           │   └── memory_store.cpython-310.pyc
+│           └── memory_store.py
+├── docker-compose.dev.yml
+├── docker-compose.prod.yml
+├── main.py
+├── requirements.txt
+├── setup_bridge.sh
+├── test.py
+└── usefull commands for the baileys command.txt

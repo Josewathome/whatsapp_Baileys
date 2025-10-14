@@ -1,0 +1,10 @@
+{
+    "name": "baileys-bridge",
+    "version": "1.0.0",
+    "dependencies": {
+      "express": "^4.18.2",
+      "@whiskeysockets/baileys": "latest",
+      "pino": "^8.14.0"
+    }
+  }
+  

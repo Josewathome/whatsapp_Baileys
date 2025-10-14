@@ -1,0 +1,24 @@
+FROM node:20-bullseye-slim
+
+# Install git and build tools
+RUN apt-get update && apt-get install -y git curl build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Copy package.json and install local dependencies
+COPY app/baileys_bridge/package.json ./
+RUN npm install
+
+# Copy app code
+COPY app/baileys_bridge/ .
+
+# Install PM2 globally
+RUN npm install -g pm2
+
+# Expose port
+EXPOSE 3000
+
+# Start with PM2 runtime
+CMD ["pm2-runtime", "baileys_bridge.js", "--name", "baileys_bridge"]
