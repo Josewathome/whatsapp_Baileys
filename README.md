@@ -146,6 +146,59 @@ Content-Type: application/json
 ```bash
 GET /api/v1/health
 ```
+# Start WhatsApp session registration
+POST /api/v1/session/start-registration
+
+# Response:
+```bash
+{
+  "session_id": "pending_pod_abc123def",
+  "qr_code": "data:image/svg+xml;base64,...",
+  "status": "qr_ready",
+  "message": "Scan QR code with WhatsApp to authenticate"
+}
+```
+
+# NEW: Complete registration with phone number
+POST /api/v1/session/complete-registration
+```bash payload
+{
+  "session_id": "pending_pod_abc123def",
+  "phone_number": "79319999999"
+}
+```
+
+# NEW: Check connection status
+GET /api/v1/session/status
+
+# Response:
+```bash
+{
+  "state": "connected",
+  "pod": "whatsapp-pod-1",
+  "session_phone": "79319999999",
+  "uptime": 3600,
+  "healthy": true
+}
+```
+# NEW: Restart connection
+```bash
+POST /api/v1/session/restart
+```
+
+### **Step 5: Monitor System**
+```bash
+# Check health - ENHANCED with more details
+curl http://localhost:8000/api/v1/health
+
+# Check session status - NEW
+curl http://localhost:8000/api/v1/session/status
+
+# Restart if needed - NEW
+curl -X POST http://localhost:8000/api/v1/session/restart
+```
+
+
 
 ## 🔧 Configuration
 
