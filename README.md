@@ -77,6 +77,12 @@ chmod +x setup_bridge.sh
 ```bash
 docker-compose up --build
 ```
+### API USAGE:
+
+1. Register session via /session/start-registration
+2. Complete registration via /session/complete-registration  
+3. Use lookup APIs as before
+4. Monitor via /session/status
 
 ## 📡 API Endpoints
 
