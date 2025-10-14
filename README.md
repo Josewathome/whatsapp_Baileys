@@ -184,26 +184,6 @@ Baileys is a Node.js library and cannot be used directly in Python. The bridge:
 - `POST /profilePictureUrl` - Get avatar URL
 - `GET /health` - Health check
 
-## 🔄 Migration Changes
-
-### Removed
-- ❌ MongoDB session storage
-- ❌ KeyDB/Redis external queue
-- ❌ Proxy systems
-- ❌ Payment integrations
-- ❌ Winston/Pino logging
-- ❌ External persistence
-
-### Added
-- ✅ In-memory session store
-- ✅ In-memory queue
-- ✅ Python native logging
-- ✅ DDD architecture
-- ✅ SMK-RK response format
-- ✅ Validator integration
-- ✅ Baileys HTTP bridge
-
-## 📊 Response Format
 
 All responses follow SMK-RK standard:
 
