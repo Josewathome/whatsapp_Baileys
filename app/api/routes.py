@@ -21,7 +21,7 @@ router = APIRouter()
 async def get_controller() -> WhatsAppController:
     """Dependency to get controller instance"""
     from main import app
-    return app.state.controller
+    return app.state.enhanced_controller
 
 
 @router.post("/lookup", response_model=ServiceResponseSchema)
@@ -39,14 +39,14 @@ async def lookup_profile(
     - Avatar images
     """
     try:
-        result = await controller.lookup_profile(request.phone)
+        result = await controller.lookup_profile(request.phone, request.session_id)
         return result
     except Exception as e:
         logger.error(f"Lookup error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/batch", response_model=BatchResponseSchema)
+@router.post("/controller", response_model=BatchResponseSchema)
 async def batch_lookup(
     request: BatchLookupRequest,
     controller: WhatsAppController = Depends(get_controller)
@@ -69,7 +69,7 @@ async def batch_lookup(
             clean_data = item.get("body", {}).get("clean_data")
             
             if item_type == "phone":
-                result = await controller.lookup_profile(clean_data)
+                result = await controller.lookup_profile(clean_data, request.session_id)
                 results.append(result)
             else:
                 logger.info(f"Skipping type: {item_type}")

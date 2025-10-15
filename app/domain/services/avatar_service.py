@@ -12,12 +12,12 @@ class AvatarService:
     def __init__(self, whatsapp_client):
         self.client = whatsapp_client
     
-    async def get_avatar(self, phone: str, format: Literal["preview", "image"] = "preview", 
+    async def get_avatar(self, phone: str,session_id: str, format: Literal["preview", "image"] = "preview", 
                         download: bool = False) -> dict:
         """Get avatar URL and optionally download as base64"""
         try:
-            jid = f"{phone}@c.us"
-            url = await self.client.profile_picture_url(jid, format)
+            jid = f"{phone}@s.whatsapp.net"
+            url = await self.client.profile_picture_url(jid,session_id, format)
             
             if not url:
                 return {"has_avatar": False, "avatar_hidden": False}

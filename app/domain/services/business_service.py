@@ -21,11 +21,11 @@ class BusinessService:
     def __init__(self, whatsapp_client):
         self.client = whatsapp_client
     
-    async def get_business_info(self, phone: str) -> dict:
+    async def get_business_info(self, phone: str, session_id: str) -> dict:
         """Get business profile information"""
         try:
-            jid = f"{phone}@c.us"
-            result = await self.client.get_business_profile(jid)
+            jid = f"{phone}@s.whatsapp.net"
+            result = await self.client.get_business_profile(jid, session_id)
             
             if not result:
                 return {"is_business": False}

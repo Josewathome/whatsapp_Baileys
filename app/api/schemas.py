@@ -5,11 +5,13 @@ from typing import List, Optional, Dict, Any
 class LookupRequest(BaseModel):
     """Request for profile lookup"""
     phone: str = Field(..., description="Phone number in international format")
+    session_id: str = Field(..., description="The Session Id of the user")
 
 
 class BatchLookupRequest(BaseModel):
     """Batch lookup request"""
     query: List[str] = Field(..., description="List of phone numbers or identifiers")
+    session_id: str = Field(..., description="The Session Id of the user")
 
 
 class ServiceResponseSchema(BaseModel):

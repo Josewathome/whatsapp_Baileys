@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     HOST: str = "0.0.0.0"
     PORT: int = 8000
     
+    VERSION_NO: str = "1.0.0"
+    VERSION_VALUE: str ="v1"
+    
     # Session settings
     COUNT_USE_FOR_RELOAD: int = 1000
     SESSION_TIMEOUT: int = 600
@@ -21,9 +24,11 @@ class Settings(BaseSettings):
     HEALTH_CHECK_FILE: str = "/tmp/app_alive.pid"
     HEALTH_CHECK_PERIOD: int = 60
     
+    
     # Validator service
     VALIDATOR_URL: str = "http://validator-service/api/v1/validate"
-    BAILEYS_BRIDGE_URL: str = "http://localhost:3000"
+    BAILEYS_BRIDGE_URL: str = "http://baileys-service:3000"
+    BAILEYS_BRIDGE_URL_EXPOSED: str = "http://localhost:3000"
     BASE_URL: str = "http://localhost:8000"
     POD_NAME: str = f"whatsapp-pod-{socket.gethostname()}"
     

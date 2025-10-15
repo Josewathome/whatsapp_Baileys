@@ -11,11 +11,11 @@ class StatusService:
     def __init__(self, whatsapp_client):
         self.client = whatsapp_client
     
-    async def get_status(self, phone: str) -> dict:
+    async def get_status(self, phone: str, session_id: str) -> dict:
         """Get status message and metadata"""
         try:
-            jid = f"{phone}@c.us"
-            result = await self.client.fetch_status(jid)
+            jid = f"{phone}@s.whatsapp.net"
+            result = await self.client.fetch_status(jid ,session_id)
             
             if not result:
                 return {"status_hidden": False}

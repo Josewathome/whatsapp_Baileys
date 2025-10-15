@@ -16,22 +16,31 @@ class SearchService:
         self.business_service = business_service
         self.avatar_service = avatar_service
     
-    async def search_profile(self, phone: str) -> dict:
+    async def search_profile(self, phone: str, session_id: str) -> dict:
         """Search for WhatsApp profile information"""
         start_time = datetime.now()
         logger.info(f"Starting profile search for: {phone}")
         
-        exists_result = await self.exists_service.check_exists(phone)
+        exists_result = await self.exists_service.check_exists(phone, session_id)
         
         if not exists_result.get("is_exists", False):
             logger.info(f"User doesn't exist: {phone}")
             raise NoDataError("User not found")
+        print("Get status uses url baileys-service for = fetchStatus")
+        status_task = self.status_service.get_status(phone,session_id)
+        print(f"fetch status Done")
         
-        status_task = self.status_service.get_status(phone)
-        business_task = self.business_service.get_business_info(phone)
-        avatar_preview_task = self.avatar_service.get_avatar(phone, format="preview")
-        avatar_full_task = self.avatar_service.get_avatar(phone, format="image")
+        print("Get getBusinessProfile uses url baileys-service for = getBusinessProfile")
+        business_task = self.business_service.get_business_info(phone,session_id)
+        print(f"fetch business Done")
         
+        print("Get image avatar preview uses url baileys-service for = profile_picture_url")
+        avatar_preview_task = self.avatar_service.get_avatar(phone,session_id, format="preview")
+        print(f"fetch privew image done")
+        
+        print("Get image avatar full uses url baileys-service for = profile_picture_url")
+        avatar_full_task = self.avatar_service.get_avatar(phone,session_id, format="image")
+        print(f"fetch full image Done ")
         results = await asyncio.gather(
             status_task,
             business_task,

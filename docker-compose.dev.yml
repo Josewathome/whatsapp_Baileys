@@ -1,33 +1,6 @@
 version: '3.8'
 
 services:
-  mainwhatsapp-api-dev:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    container_name: mainwhatsapp-api-dev
-    ports:
-      - "8000:8000"
-    env_file:
-      - .env.example
-    environment:
-      - PYTHONUNBUFFERED=1
-    volumes:
-      # Mount source code for hot reload
-      - ./app:/app/app
-      - ./main.py:/app/main.py
-    networks:
-      - whatsapp-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    stdin_open: true
-    tty: true
-
   baileys-bridge:
     build:
       context: .
@@ -35,8 +8,6 @@ services:
     container_name: baileys-service
     ports:
       - "3000:3000"  # Container port 3000 mapped to host 3000
-    env_file:
-      - .env.example
     networks:
       - whatsapp-network
     restart: always
@@ -59,6 +30,38 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
+
+  mainwhatsapp-api-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: mainwhatsapp-api-dev
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.example
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Mount source code for hot reload
+      - ./app:/app/app
+      - ./main.py:/app/main.py
+    networks:
+      - whatsapp-network
+    restart: unless-stopped
+    depends_on:
+      baileys-bridge:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    stdin_open: true
+    tty: true
+
 
 
 networks:

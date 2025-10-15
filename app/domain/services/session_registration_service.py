@@ -46,7 +46,7 @@ class SessionRegistrationService:
                 "qr_code": qr_data,
                 "status": "qr_ready",
                 "url_path": "qrcode URL",  # Will be set by route
-                "message": "Scan this REAL WhatsApp QR code to authenticate",
+                "message": "Click Open URL and Get WhatsApp QR code to authenticate",
                 "instructions": "Open WhatsApp → Linked Devices → Link a Device",
                 "source": "baileys_bridge"  # Indicates real QR code
             }
@@ -70,11 +70,18 @@ class SessionRegistrationService:
             if response.status_code == 200:
                 data = response.json()
                 qr_content = data.get("qr_content")
-                
+                qr_url = data.get('qr_url')
+                print(f"The Contents for qr code")
+                print(f"The QR content: {qr_content[:50]}")
                 if not qr_content:
                     raise SessionException("No QR content received from Baileys bridge")
+                if not qr_url:
+                    print("Creating the qr url from contents")
+                    qr_url = f"https://wa.me/settings/linked_devices#{qr_content}"
                 
-                logger.info(f"✅ Received real QR content from Baileys bridge: {qr_content[:50]}...")
+                print(f"The QR URL : {qr_url[:50]}")
+                    
+                logger.info(f"✅ Received real QR content from Baileys bridge: {qr_url[:50]}...")
                 
                 # Convert QR content to proper QR code image
                 qr_data = await self._generate_qr_from_baileys_content(qr_content)

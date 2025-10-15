@@ -3,6 +3,7 @@ FROM node:20-bullseye-slim
 # Install git and build tools
 RUN apt-get update && apt-get install -y git curl build-essential \
     && rm -rf /var/lib/apt/lists/*
+RUN which curl
 
 # Set working directory
 WORKDIR /usr/src/app

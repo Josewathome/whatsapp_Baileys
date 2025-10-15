@@ -19,6 +19,7 @@ from app.infrastructure.logging.logger import setup_logging
 from app.core.config import settings
 from app.controllers.enhanced_whatsapp_controller import EnhancedWhatsAppController
 from app.api.routes import router as api_router
+from app.api.qrcode import router as qrcode_router
 from app.api.session_routes import router as session_router
 import os
 from fastapi.responses import JSONResponse
@@ -86,7 +87,8 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="WhatsApp Profile Lookup Service - Enhanced",
     description="Enhanced service with session registration and connection management",
-    version="2.0.0",
+    version=settings.VERSION_NO,
+    docs_url="/docs",
     lifespan=lifespan
 )
 
@@ -99,9 +101,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(api_router, prefix="/api/v1")
-app.include_router(session_router, prefix="/api/v1")
-app.include_router(router, prefix="/api/v1", tags=["whatsapp"])
+app.include_router(api_router, prefix=f"/api/{settings.VERSION_VALUE}")
+app.include_router(qrcode_router, prefix=f"/api/{settings.VERSION_VALUE}")
+app.include_router(session_router, prefix=f"/api/{settings.VERSION_VALUE}")
+app.include_router(router, prefix=f"/api/{settings.VERSION_VALUE}", tags=["whatsapp"])
 
 
 @app.get("/")
@@ -109,29 +112,25 @@ async def root():
     """Root endpoint"""
     return {
         "service": settings.SERVICE_NAME,
-        "version": "1.0.0",
-        "status": "running"
+        "version": settings.VERSION_NO,
+        "docs": f"{settings.BASE_URL}/docs",
+        "status": "running",
+        "important URLS" : {
+            "Main_system_health" : f"{settings.BASE_URL}/api/{settings.VERSION_VALUE}/health",
+            "Baileyes_Whatsapp_Bridge_health" : f"{settings.BAILEYS_BRIDGE_URL_EXPOSED}/health",
+            "Whatsapp_Status" : f"{settings.BASE_URL}/api/{settings.VERSION_VALUE}/session/status",
+            
+            
+            },
+        "Main URLS" : {
+            "whatsapp_register" : f"{settings.BASE_URL}/api/{settings.VERSION_VALUE}/session/start-registration",
+            "Complete_registration" : f"{settings.BASE_URL}/api/{settings.VERSION_VALUE}/session/complete-registration",
+            "Account_Lookup" : f"{settings.BASE_URL}/api/{settings.VERSION_VALUE}/lookup",
+            "Batch_Lookup/controller" : f"{settings.BASE_URL}/api/{settings.VERSION_VALUE}/controller"
+            
+            
+            } 
     }
-from fastapi import Request
-
-@app.get("/api/v1/qrcode")
-async def show_qr(request: Request):
-    """
-    Example:
-    http://localhost:8000/api/v1/qrcode?data=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0i...
-    """
-    data = request.query_params.get("data")
-    if not data:
-        return JSONResponse({"error": "Missing 'data' query parameter"}, status_code=400)
-
-    decoded_data = urllib.parse.unquote(data)
-    print(f"The decoded data being passed: {decoded_data}")
-
-    try:
-        display_qr_from_api(decoded_data)
-        return JSONResponse({"status": "QR code displayed in browser"})
-    except Exception as e:
-        return JSONResponse({"error": str(e)}, status_code=500)
 
 
 if __name__ == "__main__":

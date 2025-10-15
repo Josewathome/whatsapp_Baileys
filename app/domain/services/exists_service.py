@@ -10,11 +10,11 @@ class ExistsService:
     def __init__(self, whatsapp_client):
         self.client = whatsapp_client
     
-    async def check_exists(self, phone: str) -> dict:
+    async def check_exists(self, phone: str, session_id: str) -> dict:
         """Check if phone number has WhatsApp account"""
         try:
-            jid = f"{phone}@c.us"
-            result = await self.client.on_whatsapp(jid)
+            jid = f"{phone}@s.whatsapp.net"
+            result = await self.client.on_whatsapp(jid, session_id)
             
             exists = result and result[0].get("exists", False) if result else False
             
