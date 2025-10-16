@@ -1,0 +1,62 @@
+/profilePictureUrl
+method:POST
+payload:
+{
+    "session_id": "pending_whatsapp-pod-1_6e283f6d",
+    "jid":   "25473333333426@s.whatsapp.net"
+}
+response
+
+{
+    "url": "https://pps.whatsapp.net/v/t61.24694-24/490583855_171785332256279977_49700603e0&_nc_cat=108"
+}
+
+
+
+/getBusinessProfile
+method:POST
+payload:
+{
+    "session_id": "pending_whatsapp-pod-1_6e283f6d",
+    "jid":   "25473333333426@s.whatsapp.net"
+}
+
+200 ok nothing
+
+
+/fetchStatus
+method:POST
+payload:
+{
+    "session_id": "pending_whatsapp-pod-1_6e283f6d",
+    "jid":   "25473333333426@s.whatsapp.net"
+}
+
+response:
+[
+    {
+        "status": {
+            "status": "Nothing 👀 Matters 💪if it's ❤️Real 💯",
+            "setAt": "2022-06-02T17:31:02.000Z"
+        },
+        "id": "2543333229426@s.whatsapp.net"
+    }
+]
+
+/onWhatsApp
+method:POST
+payload:
+{
+    "session_id": "pending_whatsapp-pod-1_6e283f6d",
+    "jid": "254722229426@s.whatsapp.net"
+}
+
+response:
+[
+    {
+        "jid":   "25473333333426@s.whatsapp.net",
+        "exists": true,
+        "lid": "224222723r430926@lid"
+    }
+]
+
