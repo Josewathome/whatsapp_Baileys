@@ -1,4 +1,3 @@
-# app/controllers/enhanced_whatsapp_controller.py
 import logging
 import asyncio
 import aiohttp

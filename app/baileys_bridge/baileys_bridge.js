@@ -1,4 +1,3 @@
-// app/baileys_bridge/baileys_bridge.js
 const express = require('express');
 const makeWASocket = require('@whiskeysockets/baileys').default;
 const { useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, Browsers } = require('@whiskeysockets/baileys');

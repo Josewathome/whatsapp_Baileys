@@ -1,6 +1,3 @@
-# ============================================================================
-# File: controllers/whatsapp_controller.py (Enhanced Version)
-# ============================================================================
 import logging
 import asyncio
 from typing import Dict

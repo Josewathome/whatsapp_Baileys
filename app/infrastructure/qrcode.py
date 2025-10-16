@@ -6,10 +6,7 @@ from app.infrastructure.encryption.encrypt import encrypt_for_url, decrypt_from_
 
 
 def display_qr_from_api(token):
-    """
-    Decrypts a QR code token and displays it in the browser
-    for WhatsApp registration (supports PNG and SVG formats).
-    """
+
 
     # Decrypt the token
     data = decrypt_from_url(token)

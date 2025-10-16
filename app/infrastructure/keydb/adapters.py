@@ -1,6 +1,3 @@
-# ============================================================================
-# File: infrastructure/keydb/adapters.py (Updated)
-# ============================================================================
 from typing import Dict, Any, List
 from datetime import datetime
 import logging
