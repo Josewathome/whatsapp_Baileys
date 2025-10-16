@@ -40,7 +40,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env.example
+      - .env
     networks:
       - whatsapp-network
     restart: always

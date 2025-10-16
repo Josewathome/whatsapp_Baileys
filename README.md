@@ -90,6 +90,8 @@ docker-compose ps
 
 ### Production Deployment
 
+In production open the docker-compose.prod.yml  and change the ` .env.example` into `.env`
+
 ```bash
 # Deploy in production mode
 docker-compose -f docker-compose.prod.yml up -d
