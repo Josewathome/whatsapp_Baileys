@@ -95,6 +95,9 @@ docker-compose ps
 docker-compose -f docker-compose.prod.yml up -d
 ```
 
+# Stopping Docker
+docker-compose -f docker-compose.prod.yml down
+
 ```
 ## 📡 API Endpoints
 ### API USAGE:

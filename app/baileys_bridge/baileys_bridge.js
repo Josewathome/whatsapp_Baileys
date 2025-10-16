@@ -10,6 +10,7 @@ const path = require('path');
 const app = express();
 app.use(express.json());
 
+
 // Add CORS middleware to handle cross-origin requests
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -237,7 +238,21 @@ async function initSocket(sessionId, retryCount = 0) {
                     status: 'authenticated'
                 });
                 sessionManager.removeAuthCallbacks(sessionId);
+            
+                // --- Send POST to FastAPI /stop/qrcode ---
+                try {
+                    const axios = require('axios');
+                    const baseUrl = 'http://main-whatsapp-service:8000';  // Loaded from .env.bailey
+                    const url = `${baseUrl}/api/v1/stop/qrcode`;
+                    axios.post(url, { stop: true }) // non-blocking
+                        .then(() => console.log(`📤 Sent stop payload to ${url}`))
+                        .catch(err => console.error(`❌ Failed to send stop payload:`, err.message));
+                } catch (error) {
+                    console.error(`❌ Error sending stop payload:`, error.message);
+                }
             }
+            
+            
 
             if (connection === 'close') {
                 const statusCode = lastDisconnect?.error instanceof Boom 
